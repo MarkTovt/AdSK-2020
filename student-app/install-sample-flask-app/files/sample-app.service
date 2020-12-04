@@ -1,0 +1,15 @@
+[Unit]
+Description=My nice service
+After=network-online.target
+
+[Service]
+Type=simple
+User=ec2-user
+ExecStart=/opt/sample-flask-app/.venv/bin/python -m flask run --host=0.0.0.0
+Environment="FLASK_APP=app.py"
+WorkingDirectory=/opt/sample-flask-app
+Restart=always
+SuccessExitStatus=2
+
+[Install]
+WantedBy=multi-user.target

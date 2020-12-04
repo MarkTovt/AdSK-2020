@@ -1,0 +1,28 @@
+
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+IP Address: 172.31.14.246
+Extension host agent listening on 42829
+
+
+[18:51:07] Extension host agent started.
+[18:51:11] [127.0.0.1][965ef278][ManagementConnection] New connection established.
+[18:51:11] [127.0.0.1][669b4b5a][ExtensionHostConnection] New connection established.
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
+Enter passphrase for /home/201739/.ssh/201739_rsa: [18:51:11] [127.0.0.1][669b4b5a][ExtensionHostConnection] <25965> Launched Extension Host Process.
+[18:51:14] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[18:51:18] Installing extension: ms-toolsai.jupyter
+[18:51:19] Downloaded extension: ms-toolsai.jupyter undefined
+[18:51:20] Extracted extension to /home/201739/.vscode-server/extensions/.ms-toolsai.jupyter-2020.11.399280825: ms-toolsai.jupyter
+[18:51:20] Renamed to /home/201739/.vscode-server/extensions/ms-toolsai.jupyter-2020.11.399280825
+[18:51:20] Installation completed. ms-toolsai.jupyter
+[18:51:20] Extensions installed successfully: ms-toolsai.jupyter
+[19:32:17] Listing 0 persistent terminals, 0 total terminals

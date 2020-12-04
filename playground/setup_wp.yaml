@@ -1,0 +1,112 @@
+- hosts: db_nodes
+  become: yes
+  vars:
+    DB_NAME: "blog"
+    DB_USER: "bloger"
+    DB_PW: "bloger"
+  tasks:
+    - name: "Provide custom repo for mariadb"
+      copy:
+        src: files/MariaDB.repo
+        dest: /etc/yum.repos.d/MariaDB.repo
+    - name: "Install mariadb dependencies"
+      yum:
+        name: "{{ MARIADB_PACKAGES }}"
+        state: present
+      vars:
+        MARIADB_PACKAGES:
+          - MariaDB-server
+          - MariaDB-client
+    - name: "Start mysql server"
+      service:
+        name: mariadb
+        state: started
+    - name: "Install db manage dependencies"
+      yum: 
+        name: python-PyMySQL
+        state: present    
+    - name: "Create db"
+      mysql_db: 
+        login_unix_socket: "/var/lib/mysql/mysql.sock"
+        name: "{{ DB_NAME}} "
+        state: present
+    - name: "Create db user"
+      mysql_user:
+        login_unix_socket: "/var/lib/mysql/mysql.sock"
+        name: "{{ DB_USER }}"
+        password: "{{ DB_PW }}"
+        priv: "{{ DB_NAME ~ '.*:ALL,GRANT' }}"
+        state: present      
+- hosts: wp_nodes
+  become: yes
+  vars:
+      my_fav_packages:
+          - cowsay
+          - mc
+          - git 
+      WP_DOWNLOAD_URL: https://wordpress.org/latest.zip
+      WP_DEST_DIR: /var/www/blog
+      EPEL_RPM_URL: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      PHP_REPO_RPM_URL: https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+      DB_NAME: "blog"
+      DB_USER: "bloger"
+      DB_PW: "bloger"
+
+  tasks:
+        - name: "Install my favourite packages"
+          yum:
+              name: "{{ my_fav_packages }}"
+              state: latest    
+        - name: "Download wordpress"
+          get_url:
+            url: "{{ WP_DOWNLOAD_URL }}"
+            dest: /tmp/wordpress.zip
+        - name: "Ensure blog dest dir exists"
+          file:
+            path: "{{WP_DEST_DIR}}"
+            state: directory
+        - name: "Unarchive WP"
+          unarchive:
+            src: /tmp/wordpress.zip
+            dest: "{{WP_DEST_DIR}}"
+            remote_src: yes
+        - name: "Install epel repo"
+          yum:
+            name: "{{EPEL_RPM_URL}}"
+            state: present
+        - name: "Install php repo"
+          yum: 
+            name: "{{PHP_REPO_RPM_URL}}"
+            state: present
+        - name: "Install php dependencies"
+          yum:
+            name:
+              - "php74"
+              - "php74-php"
+              - "php74-php-mysqlnd"
+              - "php74-php-pecl-mysql"
+            state: present
+        - name: "Install HTTP server"
+          yum: 
+            name: httpd
+            state: present
+        - name: "Copy httpd vhost"
+          template: 
+            src: "files/blog-vhost.conf"
+            dest: "/etc/httpd/conf.d/blog.conf"
+        - name: "Copy wp-config into place"
+          template: 
+            src: "files/wp-config.php"
+            dest: "{{ WP_DEST_DIR }}/wordpress/wp-config.php"
+        - file:
+            path: "/etc/httpd/conf.d/welcome.conf"
+            state: absent
+        - name: "Restart httpd"
+          service:
+            name: httpd
+            state: restarted    
+        
+        
+        
+        
+        

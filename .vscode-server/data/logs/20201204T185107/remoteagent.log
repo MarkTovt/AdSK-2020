@@ -1,0 +1,22 @@
+[2020-12-04 18:51:07.443] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2020-12-04 18:51:07.443] [remoteagent] [info] Extension host agent started.
+[2020-12-04 18:51:11.409] [remoteagent] [info] [127.0.0.1][965ef278][ManagementConnection] New connection established.
+[2020-12-04 18:51:11.414] [remoteagent] [info] [127.0.0.1][669b4b5a][ExtensionHostConnection] New connection established.
+[2020-12-04 18:51:11.499] [remoteagent] [info] [127.0.0.1][669b4b5a][ExtensionHostConnection] <25965> Launched Extension Host Process.
+[2020-12-04 18:51:14.806] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2020-12-04 18:51:18.630] [remoteagent] [info] Installing extension: ms-toolsai.jupyter
+[2020-12-04 18:51:19.144] [remoteagent] [info] Downloaded extension: ms-toolsai.jupyter undefined
+[2020-12-04 18:51:20.260] [remoteagent] [info] Extracted extension to /home/201739/.vscode-server/extensions/.ms-toolsai.jupyter-2020.11.399280825: ms-toolsai.jupyter
+[2020-12-04 18:51:20.261] [remoteagent] [info] Renamed to /home/201739/.vscode-server/extensions/ms-toolsai.jupyter-2020.11.399280825
+[2020-12-04 18:51:20.265] [remoteagent] [info] Installation completed. ms-toolsai.jupyter
+[2020-12-04 18:51:20.275] [remoteagent] [info] Extensions installed successfully: ms-toolsai.jupyter
+[2020-12-04 19:32:17.797] [remoteagent] [info] Listing 0 persistent terminals, 0 total terminals
